@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Georgia trip, 26 Sep to 4 Oct</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F1F3F2; --surface:#FFFFFF; --ink:#1F2A33; --muted:#5E6B75; --line:#D5DBDD;
+  --wine:#7B1F2E; --sea:#1F6F78; --mountain:#4F6275; --home:#8A6D3B; --vine:#56692E; --vine-bg:#E6ECD9;
+  --serif:"Noto Serif",Georgia,"Times New Roman",serif;
+  --sans:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#151B20; --surface:#1D252C; --ink:#E7ECEE; --muted:#9AA7B0; --line:#2F3A43;
+    --wine:#D0707F; --sea:#5FB3BB; --mountain:#9DB2C6; --home:#CFAE72; --vine:#A9C27A; --vine-bg:#2A3320;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151B20; --surface:#1D252C; --ink:#E7ECEE; --muted:#9AA7B0; --line:#2F3A43;
+  --wine:#D0707F; --sea:#5FB3BB; --mountain:#9DB2C6; --home:#CFAE72; --vine:#A9C27A; --vine-bg:#2A3320;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* hero */
+header{padding:48px 0 28px}
+.script{font-family:var(--serif);font-weight:900;color:var(--wine);font-size:clamp(3rem,13vw,6.2rem);line-height:1;letter-spacing:-0.01em;margin:0}
+.sub{font-family:var(--serif);font-size:clamp(1.25rem,4.5vw,1.6rem);margin:14px 0 4px}
+.meta{color:var(--muted);margin:0}
+.count{display:inline-block;margin-top:18px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;font-size:.9rem}
+
+/* route */
+.route{overflow-x:auto;margin:8px -20px 0;padding:18px 20px 22px}
+.route ol{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:0;min-width:max-content}
+.route li{display:flex;align-items:center;font-weight:600;font-size:.95rem;white-space:nowrap}
+.route li span{padding:6px 12px;border-radius:8px;color:#fff;background:var(--c)}
+.route li:not(:last-child)::after{content:"";width:26px;height:2px;background:var(--line);margin:0 4px}
+:root[data-theme="dark"] .route li span{color:#111}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .route li span{color:#111}}
+
+/* weather */
+.wx{padding:8px 0 28px}
+.wx h2,.pack h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:0 0 4px}
+.wx > p,.pack > p{margin:0 0 14px;color:var(--muted);font-size:.93rem}
+.wx > p a{color:inherit}
+.tiles{display:flex;gap:10px;overflow-x:auto;margin:0 -20px;padding:2px 20px 8px;scroll-snap-type:x mandatory}
+.tile{flex:0 0 132px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:10px 12px}
+.tile .d{font-weight:600;font-size:.9rem}
+.tile .pl{color:var(--muted);font-size:.8rem}
+.tile .tp{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.tile .tp small{font-size:.95rem;font-weight:400;color:var(--muted)}
+.tile .cd{font-size:.82rem;line-height:1.35}
+.tile .rn{font-size:.78rem;color:var(--muted);margin-top:4px}
+.tile.wet .rn{color:var(--sea);font-weight:600}
+
+/* day weather */
+.dwx{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-size:.9rem}
+.dwx .line{display:flex;flex-wrap:wrap;gap:2px 10px}
+.dwx .line + .line{margin-top:4px}
+.dwx .tt{font-weight:600;font-variant-numeric:tabular-nums}
+.dwx .wear{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.dwx .wear b{font-weight:600}
+
+/* packing */
+.pack{padding:8px 0 28px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.pgrid .trip ul{margin:8px 0 0;padding:0;list-style:none;font-size:.9rem}
+.pgrid .trip li{padding:3px 0 3px 22px;position:relative}
+.pgrid .trip li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:12px;border:1.5px solid var(--muted);border-radius:3px}
+
+/* flights */
+.flights{padding:8px 0 28px}
+.flights h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:0 0 4px}
+.flights > p{margin:0 0 16px;color:var(--muted);font-size:.93rem}
+.trips{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.trip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px}
+.trip h3{margin:0;font-size:1rem;font-weight:600}
+.trip .when{margin:0 0 12px;color:var(--muted);font-size:.88rem}
+.leg{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;padding:8px 0}
+.leg .fn{font-weight:600;color:var(--wine);font-variant-numeric:tabular-nums}
+.leg .path{font-weight:500}
+.leg .sub2{grid-column:2;color:var(--muted);font-size:.85rem}
+.lay{margin:2px 0;padding:6px 10px;border-left:2px dashed var(--line);color:var(--muted);font-size:.85rem}
+.refs{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.88rem;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.refs dt{color:var(--muted)} .refs dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums;user-select:all}
+.bag{margin-top:14px;color:var(--muted);font-size:.85rem}
+@media (max-width:620px){.trips{grid-template-columns:1fr}}
+.tl li.lay-item .what{color:var(--muted);font-weight:400;font-style:italic}
+.tl li.lay-item::before{border-style:dashed}
+
+/* stays */
+.stays{padding:8px 0 28px}
+.stays h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:0 0 4px}
+.stays > p{margin:0 0 16px;color:var(--muted);font-size:.93rem}
+.stay-card{scroll-margin-top:16px}
+.stay-card .addr{margin:2px 0 10px;color:var(--muted);font-size:.88rem}
+.stay-card .facts{margin:0;padding:0;list-style:none;font-size:.9rem}
+.stay-card .facts li{padding:2px 0}
+.stay-card .refs{margin-top:10px;padding-top:10px}
+.stay-card:target{outline:2px solid var(--wine);outline-offset:2px}
+a.stay{color:inherit;text-decoration:none}
+a.stay:hover strong,a.stay:focus-visible strong{text-decoration:underline}
+
+/* days */
+.day{display:grid;grid-template-columns:92px 1fr;gap:0 18px;padding:28px 0;border-top:1px solid var(--line)}
+.date{font-family:var(--serif)}
+.date b{display:block;font-size:2.6rem;line-height:1;font-weight:700;color:var(--c)}
+.date small{display:block;font-family:var(--sans);color:var(--muted);font-size:.85rem;margin-top:4px}
+.date em{display:block;font-style:normal;font-family:var(--sans);font-size:.78rem;color:var(--muted);margin-top:2px}
+.today-tag{display:inline-block;margin-top:8px;font-family:var(--sans);font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--c);color:var(--bg)}
+.head h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;line-height:1.25;margin:0}
+.head p{margin:4px 0 0;color:var(--muted);font-size:.93rem}
+.stay{display:inline-flex;gap:6px;align-items:center;margin-top:10px;font-size:.88rem;padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface)}
+.stay strong{font-weight:600}
+
+.tl{list-style:none;margin:18px 0 0;padding:0 0 0 18px;border-left:2px solid var(--c)}
+.tl li{position:relative;padding:0 0 16px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--c)}
+.tl li.done::before{background:var(--c)}
+.row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.t{font-weight:600;font-variant-numeric:tabular-nums;color:var(--c);min-width:0}
+.what{font-weight:500}
+.info{color:var(--muted);font-size:.88rem;margin-top:2px}
+.badge{font-size:.75rem;font-weight:600;padding:1px 8px;border-radius:6px;background:var(--vine-bg);color:var(--vine)}
+.note{font-style:italic;font-family:var(--serif);color:var(--muted);font-size:.9rem}
+
+.tbilisi{--c:var(--wine)} .batumi{--c:var(--sea)} .kazbegi{--c:var(--mountain)} .home{--c:var(--home)}
+
+footer{border-top:1px solid var(--line);padding:24px 0 48px;color:var(--muted);font-size:.85rem}
+footer p{margin:0 0 6px}
+
+@media (max-width:520px){
+  .day{grid-template-columns:1fr;gap:10px}
+  .date{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .date b{font-size:2rem}
+  .date small,.date em{margin-top:0}
+  .today-tag{margin-top:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="script">Georgia</h1>
+    <p class="sub">26 Sep to 4 Oct 2026</p>
+    <p class="meta">Adiv and Papitha. Tbilisi, Batumi, Kazbegi and back.</p>
+    <span class="count" id="count"></span>
+  </header>
+
+  <nav class="route" aria-label="Route">
+    <ol>
+      <li class="home"><span>Chennai</span></li>
+      <li class="tbilisi"><span>Tbilisi</span></li>
+      <li class="batumi"><span>Batumi</span></li>
+      <li class="tbilisi"><span>Tbilisi</span></li>
+      <li class="kazbegi"><span>Kazbegi</span></li>
+      <li class="tbilisi"><span>Tbilisi</span></li>
+      <li class="home"><span>Home</span></li>
+    </ol>
+  </nav>
+
+  <section class="wx" aria-label="Weather">
+    <h2>Weather</h2>
+    <p>AccuWeather forecast, checked 20 Sep. It will shift, so check <a href="https://www.accuweather.com/en/ge/tbilisi/171705/10-day-weather-forecast/171705">Tbilisi</a>, <a href="https://www.accuweather.com/en/ge/batumi/13/10-day-weather-forecast/13">Batumi</a> and <a href="https://www.accuweather.com/en/ge/stepantsminda/1-169707_1_al/10-day-weather-forecast/1-169707_1_al">Kazbegi</a> closer to the day.</p>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="pack" aria-label="Packing list">
+    <h2>Packing list</h2>
+    <p>Warm days in Tbilisi, near freezing nights in Kazbegi. Pack in layers.</p>
+    <div class="pgrid">
+      <div class="trip"><h3>Clothes</h3><ul>
+        <li>T-shirts for the Tbilisi days</li>
+        <li>2 to 3 full-sleeve tops</li>
+        <li>Thermal inner set each, for Kazbegi</li>
+        <li>Fleece or hoodie</li>
+        <li>Warm puffer jacket</li>
+        <li>Rain jacket or poncho</li>
+        <li>Comfy trousers or jeans</li>
+        <li>One nice outfit for the big Friday night</li>
+      </ul></div>
+      <div class="trip"><h3>Feet, head, hands</h3><ul>
+        <li>Walking shoes with good grip, waterproof if possible</li>
+        <li>Wool socks plus a spare pair for 2 Oct</li>
+        <li>Flip-flops for the hotel</li>
+        <li>Beanie and gloves, one set each</li>
+        <li>Cap and sunglasses</li>
+      </ul></div>
+      <div class="trip"><h3>Weather kit</h3><ul>
+        <li>Compact umbrella</li>
+        <li>Sunscreen, UV is moderate in Tbilisi</li>
+        <li>Lip balm and moisturiser for the dry cold</li>
+        <li>Water bottle</li>
+      </ul></div>
+      <div class="trip"><h3>Travel bits</h3><ul>
+        <li>Passports</li>
+        <li>Hotel vouchers, printed or on phone, plus photo ID</li>
+        <li>Plug adapter, Georgia uses Type C and F</li>
+        <li>Power bank and cables</li>
+        <li>Snacks and something to do for the 5 hr train</li>
+        <li>Warm layer in the cabin bag for the flights</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="flights" aria-label="Flights">
+    <h2>Flights</h2>
+    <p>Qatar Airways via Doha, economy. Same PNR both ways.</p>
+    <div class="trips">
+      <div class="trip">
+        <h3>Going</h3>
+        <p class="when">Sun 27 Sep, Chennai to Tbilisi</p>
+        <div class="leg"><span class="fn">QR 4789</span><span class="path">Chennai 4:05 AM to Doha 6:10 AM</span><span class="sub2">Run by IndiGo, Chennai T2, 4h 35m</span></div>
+        <div class="lay">1h 40m layover in Doha, change of planes</div>
+        <div class="leg"><span class="fn">QR 255</span><span class="path">Doha 7:50 AM to Tbilisi 12:35 PM</span><span class="sub2">3h 45m</span></div>
+      </div>
+      <div class="trip">
+        <h3>Coming back</h3>
+        <p class="when">Sat 3 Oct, Tbilisi to Chennai</p>
+        <div class="leg"><span class="fn">QR 256</span><span class="path">Tbilisi 2:00 PM to Doha 5:00 PM</span><span class="sub2">4h</span></div>
+        <div class="lay">2h 20m layover in Doha, change of planes</div>
+        <div class="leg"><span class="fn">QR 4788</span><span class="path">Doha 7:20 PM to Chennai 2:40 AM</span><span class="sub2">Run by IndiGo, lands Sun 4 Oct, 4h 50m</span></div>
+      </div>
+    </div>
+    <dl class="refs">
+      <dt>PNR</dt><dd>7O6JEY</dd>
+      <dt>Papitha Mohan</dt><dd>E-ticket 2140142864</dd>
+      <dt>Adiv Mohan Sharad</dt><dd>E-ticket 2140142865</dd>
+    </dl>
+    <p class="bag">Baggage per person: 7 kg cabin, 25 kg check-in.</p>
+  </section>
+
+  <section class="stays" aria-label="Stays">
+    <h2>Stays</h2>
+    <p>Five bookings, every night covered. All under Papitha Mohan.</p>
+    <div class="trips">
+      <div class="trip stay-card" id="stay-silver39">
+        <h3>Silver 39 Corner Hotel</h3>
+        <p class="when">27 to 29 Sep, 2 nights, Tbilisi</p>
+        <p class="addr">39 Vertskhli Street, Tbilisi City Center, Tbilisi 0105</p>
+        <ul class="facts"><li>Economy double room, large bed, non-smoking</li><li>Arrival noted as 1 to 2 PM, express check-in</li></ul>
+        <dl class="refs"><dt>Booking ref</dt><dd>101147658780</dd><dt>Guest ref</dt><dd>2047653323</dd></dl>
+      </div>
+      <div class="trip stay-card" id="stay-leport">
+        <h3>Le Port Boutique Apart Hotel</h3>
+        <p class="when">29 to 30 Sep, 1 night, Batumi</p>
+        <p class="addr">Gogebashvili Street 30, Batumi City Center, Batumi 6000</p>
+        <ul class="facts"><li>Standard queen room, non-smoking</li><li>Breakfast and parking included</li></ul>
+        <dl class="refs"><dt>Booking ref</dt><dd>19741220</dd><dt>Guest ref</dt><dd>2047651848</dd></dl>
+      </div>
+      <div class="trip stay-card" id="stay-badagoni1">
+        <h3>Badagoni Boutique Hotel Rustaveli</h3>
+        <p class="when">30 Sep to 1 Oct, 1 night, Tbilisi</p>
+        <p class="addr">4 Freedom Square, Tbilisi City Center, Tbilisi 105</p>
+        <ul class="facts"><li>Budget twin room, non-smoking</li><li>Breakfast included</li></ul>
+        <dl class="refs"><dt>Agoda booking ID</dt><dd>2047646721</dd><dt>Booking ref</dt><dd>6181743900</dd></dl>
+      </div>
+      <div class="trip stay-card" id="stay-northgate">
+        <h3>Northgate Hotel Kazbegi</h3>
+        <p class="when">1 to 2 Oct, 1 night, Stepantsminda</p>
+        <p class="addr">Tbilisi Street 8, Kazbegi 4700</p>
+        <ul class="facts"><li>Twin room with back mountain view, non-smoking</li><li>Parking included, carry photo ID for check-in</li></ul>
+        <dl class="refs"><dt>Agoda booking ID</dt><dd>2047649078</dd><dt>Booking ref</dt><dd>5254566558</dd></dl>
+      </div>
+      <div class="trip stay-card" id="stay-badagoni2">
+        <h3>Badagoni Boutique Hotel Rustaveli</h3>
+        <p class="when">2 to 3 Oct, 1 night, Tbilisi</p>
+        <p class="addr">4 Freedom Square, Tbilisi City Center, Tbilisi 105</p>
+        <ul class="facts"><li>Budget twin room, non-smoking</li><li>Breakfast included</li></ul>
+        <dl class="refs"><dt>Agoda booking ID</dt><dd>2047644780</dd><dt>Booking ref</dt><dd>5826762418</dd></dl>
+      </div>
+    </div>
+  </section>
+
+  <main id="days"></main>
+
+  <footer>
+    <p>Booked items are the ones ticked in the planner sheet.</p>
+    <p>Timings are best-time windows. Confirm the Batumi to Tbilisi train schedule before the 30th.</p>
+  </footer>
+</div>
+
+<script>
+const days = [
+  { d:"2026-09-26", day:"Saturday", region:"home", place:"Chennai", title:"Head to Chennai",
+    blurb:"Get to Chennai and do a late-night airport run for the 4:05 AM flight.", items:[
+      {what:"Go to Chennai"},
+      {t:"Late night", what:"Head to Chennai airport, T2", best:"be there by about 1:00 AM for the international check-in"}
+  ]},
+  { d:"2026-09-27", day:"Sunday", wx:[{pl:"Tbilisi", hi:26, lo:16, c:"Mostly sunny", rain:4, ic:"☀️"}], wear:"T-shirt and comfy trousers, light jacket for dinner. Sunglasses and sunscreen. Keep a warm layer handy on the flights.", region:"tbilisi", place:"Tbilisi", title:"Land in Tbilisi",
+    blurb:"Via Doha, land at 12:35 PM, check in, then an easy first evening.", stay:"Silver 39 Corner Hotel", sid:"stay-silver39", items:[
+      {t:"4:05 AM", what:"QR 4789 Chennai to Doha", done:true, dur:"4h 35m", best:"run by IndiGo, lands 6:10 AM"},
+      {t:"6:10 AM", what:"Layover in Doha, 1h 40m", lay:true},
+      {t:"7:50 AM", what:"QR 255 Doha to Tbilisi", done:true, dur:"3h 45m", best:"lands 12:35 PM"},
+      {t:"1:30 PM", what:"Airport to hotel, Tbilisi", info:"after immigration and bags"},
+      {t:"2:00 PM", what:"Hotel check-in", done:true, note:"Silver 39 yeah!"},
+      {t:"5:30 PM", what:"Museum of Illusions", dur:"1–1.5 hr", best:"6:00–7:30 PM (golden hour)"},
+      {what:"First proper dinner", dur:"1.5–2 hr", best:"7:45–9:15 PM"}
+  ]},
+  { d:"2026-09-28", day:"Monday", wx:[{pl:"Tbilisi", hi:25, lo:15, c:"Partly sunny", rain:7, ic:"⛅"}], wear:"T-shirt, cap and good walking shoes for the Narikala climb. Light jacket for Mtatsminda at night.", region:"tbilisi", place:"Tbilisi", title:"Old Tbilisi, up high and on the river",
+    blurb:"Cable car, balloon, river and city lights.", stay:"Silver 39 Corner Hotel", sid:"stay-silver39", items:[
+      {what:"Rike to Narikala cable car", dur:"1.5–2 hr", best:"10:00 AM–12:00 PM"},
+      {what:"Rike Park hot air balloon", dur:"1–1.5 hr", best:"10:00–11:30 AM"},
+      {what:"Kura river cruise", dur:"45–60 min", best:"4:00–5:00 PM (weather permitting)"},
+      {what:"Mtatsminda Park", dur:"3–4 hr", best:"7:30–10:30 PM (city lights)"}
+  ]},
+  { d:"2026-09-29", day:"Tuesday", wx:[{pl:"Batumi", hi:20, lo:16, c:"Cloudy", rain:25, ic:"☁️"}], wear:"Full sleeves or T-shirt with a light jacket. It gets breezy on the Argo cable car and at the fountains. Keep the umbrella in the bag.", region:"batumi", place:"Batumi", title:"Fly to Batumi, the seaside day",
+    blurb:"Dolphins, sunset cable car and the boulevard at night.", stay:"Le Port Boutique Apart Hotel", sid:"stay-leport", items:[
+      {t:"9:00 AM", what:"Flight to Batumi", done:true, dur:"2–2.5 hr incl. airport", best:"6:30–9:00 AM"},
+      {what:"Hotel check-in, Batumi", done:true, note:"Le Port yeah!", dur:"30–45 min", best:"11:30 AM–12:15 PM (on arrival)"},
+      {what:"Dolphinarium", dur:"1 hr incl. early arrival", best:"3:30–4:30 PM (4:00 PM show)"},
+      {what:"Argo cable car", dur:"1.5–2 hr", best:"5:30–7:30 PM (sunset views)"},
+      {what:"Miracle Park", dur:"1–1.5 hr", best:"7:00–8:30 PM"},
+      {what:"Fountains at the Boulevard", dur:"45–60 min", best:"9:00–10:00 PM"}
+  ]},
+  { d:"2026-09-30", day:"Wednesday", wx:[{pl:"Batumi", hi:17, lo:13, c:"Clouds and sun", rain:25, ic:"⛅"},{pl:"Tbilisi night", hi:20, lo:9, c:"Clouds and sun", rain:25, ic:"⛅"}], wear:"Hoodie for the early seafront bike ride, comfy clothes for the long train. Tbilisi drops to 9° at night, so keep the fleece out.", region:"batumi", place:"Batumi to Tbilisi", title:"Seafront morning, train back",
+    blurb:"Bike the promenade, then the long train ride to Tbilisi.", stay:"Badagoni Boutique Hotel Rustaveli", sid:"stay-badagoni1", items:[
+      {what:"Seafront promenade and bike", dur:"2–2.5 hr", best:"7:00–9:30 AM"},
+      {what:"Train back to Tbilisi", dur:"5–5.5 hr", best:"2:00–7:30 PM (confirm train schedule)"},
+      {what:"Hotel check-in, Tbilisi", done:true, note:"Badagoni Boutique Hotel, Rustaveli yeah!", dur:"30–45 min", best:"8:00–8:45 PM (after arrival)"}
+  ]},
+  { d:"2026-10-01", day:"Thursday", wx:[{pl:"Mtskheta drive", hi:18, lo:9, c:"Afternoon shower", rain:60, ic:"🌦️"},{pl:"Kazbegi", hi:11, lo:4, c:"Mostly cloudy", rain:25, ic:"☁️"}], wear:"Layer up: full sleeves, fleece and a windproof jacket. Beanie for Gudauri viewpoint. Grippy shoes and rain jacket for Gveleti Falls.", region:"kazbegi", place:"Up to Kazbegi", title:"Military Highway to the mountains",
+    blurb:"Mtskheta, Ananuri and Gudauri on the way up to Stepantsminda.", stay:"Northgate Hotel Kazbegi", sid:"stay-northgate", items:[
+      {what:"Drive Tbilisi to Mtskheta, cover Chronicles of Georgia en route", dur:"30–45 min", best:"8:30–9:15 AM"},
+      {what:"Mtskheta", dur:"1 hr", best:"9:15–10:15 AM"},
+      {what:"Ananuri Fortress", dur:"45 min", best:"11:15 AM–12:00 PM"},
+      {what:"Friendship Monument / Gudauri viewpoint", dur:"30 min", best:"12:45–1:15 PM"},
+      {what:"Hotel check-in, Stepantsminda", done:true, note:"Northgate yeah!", dur:"30 min", best:"2:30–3:00 PM"},
+      {what:"Gveleti Falls", dur:"2.5–3 hr", best:"3:30–6:30 PM"}
+  ]},
+  { d:"2026-10-02", day:"Friday", wx:[{pl:"Kazbegi", hi:11, lo:2, c:"Periods of rain", rain:60, ic:"🌧️"},{pl:"Tbilisi", hi:19, lo:8, c:"Sun and some clouds", rain:25, ic:"⛅"}], wear:"Coldest and wettest morning of the trip. Thermals, puffer, rain jacket, gloves, beanie and waterproof shoes for Gergeti. Spare socks. Peel down once back in Tbilisi.", region:"tbilisi", place:"Kazbegi to Tbilisi", title:"Gergeti at sunrise, then the big Friday night",
+    blurb:"Beat the tour groups to the church, drive down, shop and celebrate.", stay:"Badagoni Boutique Hotel Rustaveli", sid:"stay-badagoni2", items:[
+      {what:"4x4 drive to the church", dur:"30–45 min each way", best:"7:30–8:15 AM"},
+      {what:"Gergeti Trinity Church", dur:"1–1.5 hr", best:"8:15–9:45 AM (before tour groups)"},
+      {what:"Drive back Kazbegi to Tbilisi", dur:"3–3.5 hr driving only", best:"10:15 AM–1:45 PM"},
+      {what:"Hotel check-in for the big Friday night", done:true, note:"Badagoni Boutique Hotel, Rustaveli yeah!", dur:"30–45 min", best:"2:00–2:45 PM"},
+      {what:"Shopping district, Tbilisi", dur:"1.5–2 hr", best:"4:30–6:30 PM"}
+  ]},
+  { d:"2026-10-03", day:"Saturday", wx:[{pl:"Tbilisi", hi:22, lo:9, c:"Mostly cloudy", rain:25, ic:"☁️"}], wear:"Comfy travel clothes with a light jacket. Warm layer in the cabin bag for the flights.", region:"home", place:"Heading home", title:"Slow breakfast, then home",
+    blurb:"Pack after breakfast and head out with buffer for the 2 PM flight.", items:[
+      {what:"Breakfast and packing", dur:"2–3 hr"},
+      {t:"10:30 AM", what:"Leave the hotel for Tbilisi airport", info:"3.5 hr before the flight"},
+      {t:"2:00 PM", what:"QR 256 Tbilisi to Doha", done:true, dur:"4h", best:"lands 5:00 PM"},
+      {t:"5:00 PM", what:"Layover in Doha, 2h 20m", lay:true},
+      {t:"7:20 PM", what:"QR 4788 Doha to Chennai", done:true, dur:"4h 50m", best:"run by IndiGo, lands 2:40 AM Sunday"}
+  ]},
+  { d:"2026-10-04", day:"Sunday", region:"home", place:"Chennai", title:"Back in Chennai",
+    blurb:"Early morning landing. Home and sleep.", items:[
+      {t:"2:40 AM", what:"Land in Chennai", done:true}
+  ]}
+];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const todayISO = (() => { const n = new Date(); return new Date(n.getTime() - n.getTimezoneOffset()*60000).toISOString().slice(0,10); })();
+
+document.getElementById("days").innerHTML = days.map(day => {
+  const dt = new Date(day.d + "T00:00:00");
+  const num = dt.getDate();
+  const mon = dt.toLocaleString("en-GB",{month:"short"});
+  const isToday = day.d === todayISO;
+  const items = day.items.map(it => `
+    <li class="${it.done ? "done" : ""}${it.lay ? " lay-item" : ""}">
+      <div class="row">
+        ${it.t ? `<span class="t">${esc(it.t)}</span>` : ""}
+        <span class="what">${esc(it.what)}</span>
+        ${it.done ? `<span class="badge">Booked</span>` : ""}
+      </div>
+      ${(it.dur || it.best || it.info) ? `<div class="info">${[it.dur, it.best ? (/^(run|lands|be there)/.test(it.best) ? it.best : "best " + it.best) : "", it.info].filter(Boolean).map(esc).join(", ")}</div>` : ""}
+      ${it.note ? `<div class="note">${esc(it.note)}</div>` : ""}
+    </li>`).join("");
+  return `
+  <section class="day ${day.region}" id="d${day.d}" aria-label="${esc(day.day + " " + num + " " + mon)}">
+    <div class="date">
+      <b>${num} ${mon}</b>
+      <small>${esc(day.day)}</small>
+      <em>${esc(day.place)}</em>
+      ${isToday ? `<span class="today-tag">Today</span>` : ""}
+    </div>
+    <div>
+      <div class="head">
+        <h2>${esc(day.title)}</h2>
+        <p>${esc(day.blurb)}</p>
+        ${day.wx ? `<div class="dwx">${day.wx.map(w => `<div class="line"><span>${w.ic}</span><span class="tt">${w.hi}° / ${w.lo}°</span><span>${esc(w.pl)}, ${esc(w.c.toLowerCase())}</span><span style="color:var(--muted)">rain ${w.rain}%</span></div>`).join("")}<div class="wear"><b>Wear and carry:</b> ${esc(day.wear)}</div></div>` : ""}
+        ${day.stay ? `<a class="stay" href="#${day.sid}">Stay <strong>${esc(day.stay)}</strong></a>` : ""}
+      </div>
+      <ol class="tl">${items}</ol>
+    </div>
+  </section>`;
+}).join("");
+
+document.getElementById("tiles").innerHTML = days.filter(d => d.wx).flatMap(day => {
+  const dt = new Date(day.d + "T00:00:00");
+  const lbl = dt.getDate() + " " + dt.toLocaleString("en-GB",{month:"short"});
+  return day.wx.map(w => {
+    const reg = /Batumi/.test(w.pl) ? "batumi" : /Kazbegi/.test(w.pl) ? "kazbegi" : "tbilisi";
+    return `<a class="tile ${reg}${w.rain >= 50 ? " wet" : ""}" href="#d${day.d}" style="color:inherit;text-decoration:none">
+      <div class="d">${lbl}</div><div class="pl">${esc(w.pl)}</div>
+      <div class="tp">${w.hi}° <small>/ ${w.lo}°</small></div>
+      <div class="cd">${w.ic} ${esc(w.c)}</div>
+      <div class="rn">Rain ${w.rain}%</div></a>`;
+  });
+}).join("");
+
+(function(){
+  const el = document.getElementById("count");
+  const start = new Date("2026-09-26T00:00:00"), end = new Date("2026-10-04T23:59:59");
+  const now = new Date(); const dayMs = 86400000;
+  const today0 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if (now < start) {
+    const n = Math.round((start - today0)/dayMs);
+    el.textContent = n === 1 ? "Leaving tomorrow" : `Leaving in ${n} days`;
+  } else if (now <= end) {
+    const n = Math.round((today0 - start)/dayMs) + 1;
+    el.textContent = `Day ${n} of 9`;
+    const t = document.getElementById("d" + todayISO);
+    if (t) setTimeout(() => t.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}), 300);
+  } else {
+    el.textContent = "Trip done, hope it was a good one";
+  }
+})();
+</script>
+</body>
+</html>
